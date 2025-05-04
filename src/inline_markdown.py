@@ -1,6 +1,22 @@
 import re
 from textnode import TextType, TextNode
 
+def text_to_textnodes(text):
+    # first makes a TextNode out of text inputted
+    nodes = [TextNode(text, TextType.TEXT)]
+    print(f"nodes: {nodes}")
+    nodes = split_nodes_delimiter(nodes, "`", TextType.CODE)
+    print(f"nodes after CODE: {nodes}")
+    nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD)
+    print(f"nodes after BOLD: {nodes}")
+    nodes = split_nodes_delimiter(nodes, "_", TextType.ITALIC)
+    print(f"nodes after ITALIC: {nodes}")
+    nodes = split_nodes_image(nodes)
+    print(f"nodes after IMAGE: {nodes}")
+    nodes = split_nodes_link(nodes)
+    print(f"nodes after LINK: {nodes}")
+    return nodes
+
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_list = []
 
@@ -130,7 +146,7 @@ def extract_markdown_links(text):
         return matches
 
 
-    
+
 
 
 
