@@ -1,33 +1,29 @@
 
-
+# This function should seperate different sections of a markdown document into blocks
 def markdown_to_blocks(markdown):
-    # This function should seperate different sections of a markdown document into blocks
-    cleaned_blocks = []
-    # seperates the text by two new lines
-    print(f"input markdown: {repr(markdown)}")
+    # first strip trailing whitespace from the input markdown
     markdown = markdown.strip()
+    # Then split by two newlines
     raw_blocks = markdown.split("\n\n")
-    print(f"raw blocks: {raw_blocks}")
+    # cycle through each block
+    cleaned_blocks = []
     for block in raw_blocks:
+        # strip trailing white space for each block
         stripped_block = block.strip()
-        print(f"stripped_block: {stripped_block}")
         # skips empty blocks
         if stripped_block:
+            # if there is a newline in the middle of a stripped block
             if "\n" in stripped_block:
-                lines = block.split("\n")
-                print(f"lines: {lines}")
+                # split the block into lines
+                lines = stripped_block.split("\n")
                 # strip whitespace for each line in lines
                 cleaned_lines = [line.strip() for line in lines]
-                print(f"cleaned_lines: {cleaned_lines} lenght of cleaned_lines: {len(cleaned_lines)}")
                 # join the cleaned_lines with a new line
                 cleaned_block = "\n".join(cleaned_lines)
-                print(f"cleaned_block: {cleaned_block} length of cleaned_block: {len(cleaned_block)}")
+                # append cleaned_blocks with the cleaned_block
                 cleaned_blocks.append(cleaned_block)
             else:
+                # if there is no newline in the block, just append to cleaned_blocks
                 cleaned_blocks.append(stripped_block)
-    print(f"cleaned_blocks after loop: {cleaned_blocks}")
     return cleaned_blocks
 
-    
-    
-    # cleaned_lines = [line.strip() for line in lines]
